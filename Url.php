@@ -6,6 +6,7 @@ require_once('UrlInterface.php');
 
 /**
  * Class Url наследует методы Интерфейса  UrlInterface, и реализует представления параметров сущности Url.
+ *
  * На  вход принимается данные строгой типизации строки, непосредственно сам Url.
  * Методом __construct, производится проверка входных данных и разборка строки на основные параметры.
  * В результате чего производится присвоение полученных значений основным свойствам класса,
@@ -33,17 +34,17 @@ require_once('UrlInterface.php');
 
 class Url implements UrlInterface
 {
-    protected $componentUrl = 'Элемент отсутствует';
-    protected $inputParam = 'Элемент отсутствует';
-    protected $schemeUrl = 'Элемент отсутствует';
-    protected $hostUrl = 'Элемент отсутствует';
-    protected $portUrl = 'Элемент отсутствует';
-    protected $userUrl = 'Элемент отсутствует';
-    protected $passUrl = 'Элемент отсутствует';
-    protected $pathUrl = 'Элемент отсутствует';
-    protected $fragmentUrl = 'Элемент отсутствует';
-    protected $queryParam = 'Элемент отсутствует';
-    protected $paramSet = [];
+    private $componentUrl = 'Элемент отсутствует';
+    private $inputParam = 'Элемент отсутствует';
+    private $schemeUrl = 'Элемент отсутствует';
+    private $hostUrl = 'Элемент отсутствует';
+    private $portUrl = 'Элемент отсутствует';
+    private $userUrl = 'Элемент отсутствует';
+    private $passUrl = 'Элемент отсутствует';
+    private $pathUrl = 'Элемент отсутствует';
+    private $fragmentUrl = 'Элемент отсутствует';
+    private $queryParam = 'Элемент отсутствует';
+    private $paramSet = [];
 
 
     public function __construct(string $url)
@@ -116,7 +117,7 @@ class Url implements UrlInterface
         return $this->paramSet;
     }
 
-    public function getQueryParam(string $key, string $default = NULL) : string
+    public function getQueryParam(string $key, string $default = NULL) : ?string
     {
         if(!empty($this->paramSet) && array_key_exists($key, $this->paramSet))
         {

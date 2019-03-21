@@ -1,36 +1,25 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: nik
- * Date: 15.03.19
- * Time: 0:46
- */
+
+declare(strict_types=1);
 
 require_once('Square.php');
 
 use square as variable;
 
-
 /**
- * Class SquaresGenerator
+ * Класс SquaresGenerator
  *
- * includes a static set generate
+ * Реализует сущность, набора экземпляров квадратов.
+ *
+ * За счет метода generate производится формирование массива объектов класса Square.
+ *
  */
 
 class SquaresGenerator
 {
-    /**
-     * returns an array of class objects Square
-     *
-     * @param $side
-     * @param $value
-     *
-     * @return array
-     */
-
-    public static function generate($side, $value)
+    public static function generate(float $side, int $value)
     {
-        for($i = 1; $i <=$value; $i++)
+        for($i = 1; $i <= $value; $i++)
         {
             $result[] = new variable\Square($side);
         }
@@ -38,4 +27,3 @@ class SquaresGenerator
     }
 }
 
-$squares = SquaresGenerator::generate(3, 2);

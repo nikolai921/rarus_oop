@@ -1,44 +1,71 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Class Circle
- * Includes a set of methods and properties for the implementation
- * of calculations of the area and perimeter of the circle
+ * Класс Circle реализует параметры сущности Круг.
+ *
+ * В методе __construct() принимает на вход параметр строго типа float,
+ * производится проверка входных данных и вычисление основных параметров
+ * с присвоением полученных значений свойствам.
+ *
+ * $radius;
+ * $figureArea;
+ * $circumference;
+ *
+ * Для хеширования результатов, вычисление площади и периметра круга вынесены в отдельные методы,
+ * которые вызываются в случая первого расчета.
  */
 
 class Circle
 {
 
     const CONSTANT = 3.14;
+    private $radius;
+    private $figureArea;
+    private $circumference;
 
-
-    public function __construct($radius)
+    public function __construct(float $radius)
     {
-        $this->radius = $radius;
+        if($radius > 0)
+        {
+            $this->radius = $radius;
+        } else
+        {
+            throw new Exception('Число отрицательное, не может быть использовано в расчетах');
+        }
     }
 
-    /**
-     * Implements the calculation of the area of a circle, taking the property $radius
-     *
-     * @return float|int
-     */
+    public function calculatArea()
+    {
+        $this->figureArea = self::CONSTANT * $this->radius * $this->radius;
+    }
+
+    public function calculatCircumference()
+    {
+        $this->circumference = 2 * self::CONSTANT * $this->radius;
+    }
+
     public function getArea()
     {
-        return self::CONSTANT * $this->radius * $this->radius;
+        if(empty($this->figureArea))
+        {
+            $this->calculatArea();
+        }
+        return $this->figureArea;
     }
 
-    /**
-     * Implements the calculation of the perimeter of the circle, taking the property $radius
-     *
-     * @return float|int
-     */
     public function getCircumference()
     {
-        return 2 * self::CONSTANT * $this->radius;
+        if(empty($this->circumference))
+        {
+            $this->calculatCircumference();
+        }
+        return $this->circumference;
     }
 }
 
-$param = new Circle(5);
+$param = new Circle(5.5);
 
 echo $param->getArea();
 echo $param->getCircumference();

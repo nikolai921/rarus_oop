@@ -1,73 +1,59 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Class Random
+ * Класс Random реализует сущность генератора случайных чисел.
  *
- * Implement a random number generator
- * using the linear congruential method.
+ * На  вход принимается данные строгой типизации целочисленного значения.
+ * Методом __construct, производится проверка входных данных,
+ * с присвоением полученных значений свойствам.
+ *
+ * Его единственной обязанностью является вычисление случайного числа, по заданному алгоритму.
+ * Методы класса реализуют вычисдение случайного числа, а именно метод getNext(), выводы полученных результатов
+ * и сброс генератора на начальное значение.
  *
  */
 
 class Random
 {
-    public $var_start;
-    public $var_reset;
-    public $var_a = 106;
-    public $var_c = 1283;
-    public $var_m = 6075;
+    private $seed;
+    private $initialValue;
+    private $resetValue;
+    private static $coefficientA = 106;
+    private static $coefficientC = 1283;
+    private static $coefficientM = 6075;
 
-
-    /**
-     * Random constructor.
-     *
-     * in claas, the $var_start $var_reset variable is assigned to the value of the $seed argument
-     *
-     * @param $seed
-     */
-    public function __construct($seed)
+    public function __construct(int $seed)
     {
         $this->seed = $seed;
-        $this->var_start = $seed;
-        $this->var_reset = $seed;
-
+        $this->resetValue = $seed;
+        $this->initialValue = $seed;
     }
-
-    /**
-     * Implement a random number generator
-     *
-     * @return int
-     */
 
     public function getNext()
     {
-        $this->var_start = ($this->var_a * $this->var_start + $this->var_c) % $this->var_m;
-        return $this->var_start;
-
+        $this->initialValue = (self::$coefficientA * $this->initialValue + self::$coefficientC) % self::$coefficientM;
+        return $this->initialValue;
     }
-
-    /**
-     * resets the generator to the initial value
-     */
 
     public function reset()
     {
-        $this->var_start = $this->var_reset;
+        $this->initialValue = $this->resetValue;
     }
 }
 
 $param = new Random(100);
 
-echo $param->var_start;
-echo $param->var_reset;
-
-
 echo $res1 = $param->getNext();
 echo $res2 = $param->getNext();
+
 
 $param->reset();
 
-echo $res1 = $param->getNext();
-echo $res2 = $param->getNext();
+
+echo $res21 = $param->getNext();
+echo $res22 = $param->getNext();
 
 
 

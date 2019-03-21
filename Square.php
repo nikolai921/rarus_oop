@@ -1,40 +1,28 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: nik
- * Date: 15.03.19
- * Time: 0:27
- */
+
+declare(strict_types=1);
 
 namespace square;
 
 /**
- * Class Square
- *
- * describes the shape parameters of a square
- *
- * @package square
+ * Класс Square реализует параметры сущности квадрата.
+ * Методы класса принимают жестко типизированные данные,
+ * и передают полученный параметр для использования вне класса.
  */
 
 class Square
 {
+    private $sideSquare;
 
-    public function __construct($side)
+    public function __construct(float $side)
     {
-        $this->side = $side;
+        $this->sideSquare = $side;
     }
-
-    /**
-     * returns the value of the side of the square
-     *
-     * @return mixed
-     */
 
     public function getSide()
     {
         return $this->side;
     }
-
 
 }
 
